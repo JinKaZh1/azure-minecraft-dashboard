@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minecraft Server Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="container-fluid">
+            <span class="navbar-brand mb-0 h1">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Crect fill='%2352C41A' width='16' height='16'/%3E%3Crect x='16' fill='%234CAF50' width='16' height='16'/%3E%3Crect y='16' fill='%238B4513' width='16' height='16'/%3E%3Crect x='16' y='16' fill='%234CAF50' width='16' height='16'/%3E%3C/svg%3E" alt="Minecraft" class="me-2">
+                Minecraft Server Dashboard
+            </span>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <!-- Status Card -->
+                <div class="card mb-4 shadow">
+                    <div class="card-header bg-dark text-white">
+                        <h5 class="mb-0">Server Status</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="status-indicator mb-3">
+                            <div class="spinner-border text-primary" id="statusSpinner" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                            <span id="statusText" class="ms-2">Checking status...</span>
+                        </div>
+                        
+                        <div class="status-details">
+                            <p class="mb-2">
+                                <strong>VM Status:</strong>
+                                <span id="vmStatus" class="badge bg-secondary">Unknown</span>
+                            </p>
+                            <p class="mb-0">
+                                <strong>VM Name:</strong>
+                                <span id="vmName" class="text-muted">-</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Control Card -->
+                <div class="card shadow">
+                    <div class="card-header bg-dark text-white">
+                        <h5 class="mb-0">Server Controls</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-grid gap-2">
+                            <button id="startBtn" class="btn btn-success btn-lg" onclick="startServer()">
+                                <span class="spinner-border spinner-border-sm me-2" id="startSpinner" role="status" aria-hidden="true" style="display:none;"></span>
+                                Start Server
+                            </button>
+                            <button id="stopBtn" class="btn btn-danger btn-lg" onclick="stopServer()">
+                                <span class="spinner-border spinner-border-sm me-2" id="stopSpinner" role="status" aria-hidden="true" style="display:none;"></span>
+                                Stop Server
+                            </button>
+                        </div>
+                        <div id="actionMessage" class="alert mt-3" style="display:none;" role="alert"></div>
+                    </div>
+                </div>
+
+                <!-- Info Card -->
+                <div class="card mt-4">
+                    <div class="card-header bg-secondary text-white">
+                        <h5 class="mb-0">ℹ️ Information</h5>
+                    </div>
+                    <div class="card-body small">
+                        <p class="mb-2"><strong>Start:</strong> Boots the Azure VM and Minecraft server</p>
+                        <p class="mb-2"><strong>Stop:</strong> Gracefully stops Minecraft, then powers off the VM</p>
+                        <p class="mb-0 text-muted">Status auto-refreshes every 10 seconds</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
